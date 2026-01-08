@@ -1,0 +1,66 @@
+{
+    "actions": [],
+    "creation": "2026-01-08 12:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "cashfree_api_section",
+        "cashfree_client_id",
+        "cashfree_client_secret",
+        "cashfree_env"
+    ],
+    "fields": [
+        {
+            "fieldname": "cashfree_api_section",
+            "fieldtype": "Section Break",
+            "label": "Cashfree API Integration"
+        },
+        {
+            "fieldname": "cashfree_client_id",
+            "fieldtype": "Data",
+            "label": "Client ID",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cashfree_client_secret",
+            "fieldtype": "Password",
+            "label": "Client Secret",
+            "reqd": 1
+        },
+        {
+            "default": "Sandbox",
+            "fieldname": "cashfree_env",
+            "fieldtype": "Select",
+            "label": "Environment",
+            "options": "Sandbox\nProduction",
+            "reqd": 1
+        }
+    ],
+    "issingle": 1,
+    "links": [],
+    "modified": "2026-01-08 12:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance Settings",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance System Admin",
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Insurance Claim - Settlement Update",
+    "doctype_event": "Journal Entry",
+    "event_frequency": "After Submit",
+    "script_type": "DocType Event",
+    "disabled": 0,
+    "script": "# Update claim status when settlement JE is submitted\n\nif doc.user_remark and 'Claim Settlement' in doc.user_remark:\n    # Find linked insurance claim\n    claim_name = frappe.db.get_value('Insurance Claim',\n        {'settlement_journal_entry': doc.name},\n        'name'\n    )\n    \n    if claim_name:\n        claim = frappe.get_doc('Insurance Claim', claim_name)\n        claim.claim_status = 'Settled'\n        claim.save(ignore_permissions=True)\n        \n        # Send notification if enabled\n        settings = frappe.get_single('Insurance System Settings')\n        if settings.notify_customer_on_claim_status_change:\n            frappe.msgprint(\n                f'Claim {claim.claim_number} has been settled',\n                indicator='green',\n                alert=True\n            )"
+}

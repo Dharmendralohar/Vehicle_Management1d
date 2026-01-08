@@ -1,0 +1,166 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-01-06 00:07:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "policy_settings_section",
+        "policy_naming_series",
+        "grace_period_days",
+        "column_break_policy",
+        "max_claims_per_policy",
+        "max_claim_percent_of_idv",
+        "claim_settings_section",
+        "claim_naming_series",
+        "column_break_claim",
+        "default_claim_waiting_period",
+        "verification_rules_section",
+        "require_survey_before_approval",
+        "require_verification_before_approval",
+        "column_break_verification",
+        "block_approval_on_fraud_suspected",
+        "email_rules_section",
+        "notify_customer_on_policy_activation",
+        "notify_customer_on_claim_status_change",
+        "column_break_email",
+        "notification_email_template"
+    ],
+    "fields": [
+        {
+            "fieldname": "policy_settings_section",
+            "fieldtype": "Section Break",
+            "label": "Policy Settings"
+        },
+        {
+            "default": "POL-.YYYY.-.#####",
+            "fieldname": "policy_naming_series",
+            "fieldtype": "Select",
+            "label": "Policy Naming Series",
+            "options": "POL-.YYYY.-.#####\nPOL-.####"
+        },
+        {
+            "default": "15",
+            "fieldname": "grace_period_days",
+            "fieldtype": "Int",
+            "label": "Grace Period (Days)"
+        },
+        {
+            "fieldname": "column_break_policy",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "3",
+            "fieldname": "max_claims_per_policy",
+            "fieldtype": "Int",
+            "label": "Max Claims per Policy"
+        },
+        {
+            "default": "100",
+            "fieldname": "max_claim_percent_of_idv",
+            "fieldtype": "Float",
+            "label": "Max Claim % of IDV"
+        },
+        {
+            "fieldname": "claim_settings_section",
+            "fieldtype": "Section Break",
+            "label": "Claim Settings"
+        },
+        {
+            "default": "CLM-.YYYY.-.#####",
+            "fieldname": "claim_naming_series",
+            "fieldtype": "Select",
+            "label": "Claim Naming Series",
+            "options": "CLM-.YYYY.-.#####\nCLM-.####"
+        },
+        {
+            "fieldname": "column_break_claim",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "30",
+            "fieldname": "default_claim_waiting_period",
+            "fieldtype": "Int",
+            "label": "Default Claim Waiting Period (Days)"
+        },
+        {
+            "fieldname": "verification_rules_section",
+            "fieldtype": "Section Break",
+            "label": "Verification Rules"
+        },
+        {
+            "default": "1",
+            "fieldname": "require_survey_before_approval",
+            "fieldtype": "Check",
+            "label": "Require Survey Before Approval"
+        },
+        {
+            "default": "1",
+            "fieldname": "require_verification_before_approval",
+            "fieldtype": "Check",
+            "label": "Require Verification Before Approval"
+        },
+        {
+            "fieldname": "column_break_verification",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "1",
+            "fieldname": "block_approval_on_fraud_suspected",
+            "fieldtype": "Check",
+            "label": "Block Approval on Fraud Suspected"
+        },
+        {
+            "fieldname": "email_rules_section",
+            "fieldtype": "Section Break",
+            "label": "Email Rules"
+        },
+        {
+            "default": "1",
+            "fieldname": "notify_customer_on_policy_activation",
+            "fieldtype": "Check",
+            "label": "Notify Customer on Policy Activation"
+        },
+        {
+            "default": "1",
+            "fieldname": "notify_customer_on_claim_status_change",
+            "fieldtype": "Check",
+            "label": "Notify Customer on Claim Status Change"
+        },
+        {
+            "fieldname": "column_break_email",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "notification_email_template",
+            "fieldtype": "Link",
+            "label": "Notification Email Template",
+            "options": "Email Template"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "issingle": 1,
+    "links": [],
+    "modified": "2026-01-06 00:07:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance System Settings",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "read": 1,
+            "role": "System Manager",
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance System Admin",
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

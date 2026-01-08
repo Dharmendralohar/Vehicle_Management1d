@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:proposal_number",
+ "creation": "2026-01-06 00:55:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "proposal_number",
+  "customer",
+  "column_break_basic",
+  "proposal_date",
+  "status",
+  "vehicle_section",
+  "vehicle",
+  "vehicle_idv",
+  "insurance_details_section",
+  "insurance_plan",
+  "policy_duration_from",
+  "column_break_insurance",
+  "premium_amount",
+  "policy_duration_to",
+  "assessment_section",
+  "risk_assessment_notes",
+  "column_break_assessment",
+  "underwriter_remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "proposal_number",
+   "fieldtype": "Data",
+   "label": "Proposal Number",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_basic",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "proposal_date",
+   "fieldtype": "Date",
+   "label": "Proposal Date"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Proposal Status",
+   "options": "Draft\nSubmitted\nUnder Review\nUnderwriting\nApproved\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vehicle_section",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "vehicle.current_idv",
+   "fieldname": "vehicle_idv",
+   "fieldtype": "Currency",
+   "label": "Vehicle IDV",
+   "read_only": 1
+  },
+  {
+   "fieldname": "insurance_details_section",
+   "fieldtype": "Section Break",
+   "label": "Insurance Details"
+  },
+  {
+   "fieldname": "insurance_plan",
+   "fieldtype": "Link",
+   "label": "Insurance Plan",
+   "options": "Insurance Plan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "policy_duration_from",
+   "fieldtype": "Date",
+   "label": "Policy Duration From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_insurance",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premium_amount",
+   "fieldtype": "Currency",
+   "label": "Premium Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "policy_duration_to",
+   "fieldtype": "Date",
+   "label": "Policy Duration To",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "assessment_section",
+   "fieldtype": "Section Break",
+   "label": "Risk Assessment"
+  },
+  {
+   "fieldname": "risk_assessment_notes",
+   "fieldtype": "Text",
+   "label": "Risk Assessment Notes"
+  },
+  {
+   "fieldname": "column_break_assessment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "underwriter_remarks",
+   "fieldtype": "Text",
+   "label": "Underwriter Remarks",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Insurance Proposal",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-06 17:30:36.356814",
+ "modified_by": "Administrator",
+ "module": "Insurance Erp",
+ "name": "Insurance Proposal",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Insurance Agent",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Insurance Underwriter",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "proposal_number",
+ "track_changes": 1
+}

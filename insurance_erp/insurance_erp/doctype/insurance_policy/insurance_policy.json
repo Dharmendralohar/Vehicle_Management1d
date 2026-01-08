@@ -1,0 +1,200 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "field:policy_number",
+    "creation": "2026-01-06 00:55:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "policy_number",
+        "customer",
+        "column_break_basic",
+        "policy_date",
+        "status",
+        "proposal_section",
+        "insurance_proposal",
+        "vehicle",
+        "column_break_proposal",
+        "insurance_plan",
+        "vehicle_idv",
+        "policy_period_section",
+        "policy_start_date",
+        "column_break_period",
+        "policy_end_date",
+        "premium_section",
+        "premium_amount",
+        "column_break_premium",
+        "premium_paid",
+        "outstanding_amount",
+        "coverage_section",
+        "coverage_snapshot"
+    ],
+    "fields": [
+        {
+            "fieldname": "policy_number",
+            "fieldtype": "Data",
+            "label": "Policy Number",
+            "read_only": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Customer",
+            "options": "Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_basic",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "Today",
+            "fieldname": "policy_date",
+            "fieldtype": "Date",
+            "label": "Policy Date"
+        },
+        {
+            "default": "Pending Payment",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Policy Status",
+            "options": "Draft\nPending Payment\nActive\nLapsed\nCancelled\nExpired"
+        },
+        {
+            "fieldname": "proposal_section",
+            "fieldtype": "Section Break",
+            "label": "Proposal Details"
+        },
+        {
+            "fieldname": "insurance_proposal",
+            "fieldtype": "Link",
+            "label": "Insurance Proposal",
+            "options": "Insurance Proposal",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "insurance_proposal.vehicle",
+            "fieldname": "vehicle",
+            "fieldtype": "Link",
+            "label": "Vehicle",
+            "options": "Vehicle",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_proposal",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "insurance_proposal.insurance_plan",
+            "fieldname": "insurance_plan",
+            "fieldtype": "Link",
+            "label": "Insurance Plan",
+            "options": "Insurance Plan",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "insurance_proposal.vehicle_idv",
+            "fieldname": "vehicle_idv",
+            "fieldtype": "Currency",
+            "label": "Vehicle IDV",
+            "read_only": 1
+        },
+        {
+            "fieldname": "policy_period_section",
+            "fieldtype": "Section Break",
+            "label": "Policy Period"
+        },
+        {
+            "fieldname": "policy_start_date",
+            "fieldtype": "Date",
+            "label": "Policy Start Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_period",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "policy_end_date",
+            "fieldtype": "Date",
+            "label": "Policy End Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "premium_section",
+            "fieldtype": "Section Break",
+            "label": "Premium"
+        },
+        {
+            "fetch_from": "insurance_proposal.premium_amount",
+            "fieldname": "premium_amount",
+            "fieldtype": "Currency",
+            "label": "Premium Amount",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_premium",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "premium_paid",
+            "fieldtype": "Currency",
+            "label": "Premium Paid"
+        },
+        {
+            "fieldname": "outstanding_amount",
+            "fieldtype": "Currency",
+            "label": "Outstanding Amount",
+            "read_only": 1
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "coverage_section",
+            "fieldtype": "Section Break",
+            "label": "Coverage Snapshot"
+        },
+        {
+            "fieldname": "coverage_snapshot",
+            "fieldtype": "Table",
+            "label": "Coverage Snapshot",
+            "options": "Policy Coverage Snapshot",
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-01-06 00:55:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance Policy",
+    "naming_rule": "By fieldname",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Insurance System Admin",
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance Agent"
+        },
+        {
+            "read": 1,
+            "role": "Insurance Customer"
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "policy_number",
+    "track_changes": 1
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Insurance Policy - Activation on Payment",
+    "doctype_event": "Payment Entry",
+    "event_frequency": "After Submit",
+    "script_type": "DocType Event",
+    "disabled": 0,
+    "script": "# Activate insurance policy when payment is received\n\nfor ref in doc.references:\n    if ref.reference_doctype == 'Sales Invoice':\n        invoice = frappe.get_doc('Sales Invoice', ref.reference_name)\n        \n        # Check if it's an insurance policy\n        if invoice.get('is_insurance_policy'):\n            # Check if fully paid\n            if invoice.outstanding_amount == 0:\n                # Activate policy\n                invoice.policy_status = 'Active'\n                invoice.save(ignore_permissions=True)\n                \n                # Send notification if enabled\n                settings = frappe.get_single('Insurance System Settings')\n                if settings.notify_customer_on_policy_activation:\n                    # Create notification\n                    frappe.msgprint(\n                        f'Policy {invoice.policy_number} has been activated',\n                        indicator='green',\n                        alert=True\n                    )\n                    \n                    # You can add email notification here using frappe.sendmail\n                    # if settings.notification_email_template:\n                    #     frappe.sendmail(\n                    #         recipients=[invoice.contact_email or invoice.customer],\n                    #         subject=f'Policy {invoice.policy_number} Activated',\n                    #         template=settings.notification_email_template,\n                    #         args={'doc': invoice}\n                    #     )"
+}

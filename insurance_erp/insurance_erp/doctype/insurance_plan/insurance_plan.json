@@ -1,0 +1,140 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "field:plan_name",
+    "creation": "2026-01-06 00:55:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "plan_name",
+        "plan_code",
+        "column_break_basic",
+        "policy_type",
+        "is_active",
+        "pricing_section",
+        "base_premium",
+        "max_claim_percent_of_idv",
+        "column_break_pricing",
+        "deductible_amount",
+        "waiting_period_days",
+        "coverage_section",
+        "coverage_types",
+        "description_section",
+        "description"
+    ],
+    "fields": [
+        {
+            "fieldname": "plan_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Plan Name",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "plan_code",
+            "fieldtype": "Data",
+            "label": "Plan Code",
+            "unique": 1
+        },
+        {
+            "fieldname": "column_break_basic",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "policy_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Policy Type",
+            "options": "Comprehensive\nThird Party\nOwn Damage",
+            "reqd": 1
+        },
+        {
+            "default": "1",
+            "fieldname": "is_active",
+            "fieldtype": "Check",
+            "label": "Is Active"
+        },
+        {
+            "fieldname": "pricing_section",
+            "fieldtype": "Section Break",
+            "label": "Pricing"
+        },
+        {
+            "fieldname": "base_premium",
+            "fieldtype": "Currency",
+            "label": "Base Premium"
+        },
+        {
+            "default": "100",
+            "fieldname": "max_claim_percent_of_idv",
+            "fieldtype": "Float",
+            "label": "Max Claim % of IDV"
+        },
+        {
+            "fieldname": "column_break_pricing",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "deductible_amount",
+            "fieldtype": "Currency",
+            "label": "Deductible Amount"
+        },
+        {
+            "default": "0",
+            "fieldname": "waiting_period_days",
+            "fieldtype": "Int",
+            "label": "Waiting Period (Days)"
+        },
+        {
+            "fieldname": "coverage_section",
+            "fieldtype": "Section Break",
+            "label": "Coverage Types"
+        },
+        {
+            "fieldname": "coverage_types",
+            "fieldtype": "Table",
+            "label": "Coverage Types",
+            "options": "Insurance Coverage Type"
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "description_section",
+            "fieldtype": "Section Break",
+            "label": "Description"
+        },
+        {
+            "fieldname": "description",
+            "fieldtype": "Text Editor",
+            "label": "Description"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-01-06 00:55:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance Plan",
+    "naming_rule": "By fieldname",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Insurance System Admin",
+            "write": 1
+        },
+        {
+            "create": 1,
+            "read": 1,
+            "role": "Insurance Agent",
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "plan_name",
+    "track_changes": 1
+}

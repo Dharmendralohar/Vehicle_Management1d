@@ -1,0 +1,112 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-01-06 00:10:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "claim",
+        "surveyor",
+        "survey_date",
+        "section_break_survey",
+        "damage_description",
+        "estimated_repair_cost",
+        "column_break_survey",
+        "is_total_loss",
+        "attachments_section",
+        "survey_report",
+        "photos"
+    ],
+    "fields": [
+        {
+            "fieldname": "claim",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Claim",
+            "options": "Insurance Claim",
+            "reqd": 1
+        },
+        {
+            "fieldname": "surveyor",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Surveyor",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "default": "Today",
+            "fieldname": "survey_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Survey Date"
+        },
+        {
+            "fieldname": "section_break_survey",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "damage_description",
+            "fieldtype": "Text",
+            "label": "Damage Description"
+        },
+        {
+            "fieldname": "estimated_repair_cost",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Estimated Repair Cost"
+        },
+        {
+            "fieldname": "column_break_survey",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "is_total_loss",
+            "fieldtype": "Check",
+            "label": "Total Loss"
+        },
+        {
+            "fieldname": "attachments_section",
+            "fieldtype": "Section Break",
+            "label": "Attachments"
+        },
+        {
+            "fieldname": "survey_report",
+            "fieldtype": "Attach",
+            "label": "Survey Report"
+        },
+        {
+            "fieldname": "photos",
+            "fieldtype": "Attach Image",
+            "label": "Photos"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-01-06 00:10:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Claim Survey",
+    "naming_rule": "Expression (old style)",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Surveyor",
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Claims Officer"
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

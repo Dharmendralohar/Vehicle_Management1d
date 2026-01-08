@@ -1,0 +1,130 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-01-06 00:10:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "claim",
+        "verification_agent",
+        "verification_date",
+        "field_visit_section",
+        "field_visit_completed",
+        "field_visit_notes",
+        "fraud_checklist_section",
+        "fraud_indicators_checklist",
+        "fraud_suspected",
+        "column_break_fraud",
+        "recommendation",
+        "attachments_section",
+        "verification_report"
+    ],
+    "fields": [
+        {
+            "fieldname": "claim",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Claim",
+            "options": "Insurance Claim",
+            "reqd": 1
+        },
+        {
+            "fieldname": "verification_agent",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Verification Agent",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "default": "Today",
+            "fieldname": "verification_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Verification Date"
+        },
+        {
+            "fieldname": "field_visit_section",
+            "fieldtype": "Section Break",
+            "label": "Field Visit"
+        },
+        {
+            "default": "0",
+            "fieldname": "field_visit_completed",
+            "fieldtype": "Check",
+            "label": "Field Visit Completed"
+        },
+        {
+            "fieldname": "field_visit_notes",
+            "fieldtype": "Text",
+            "label": "Field Visit Notes"
+        },
+        {
+            "fieldname": "fraud_checklist_section",
+            "fieldtype": "Section Break",
+            "label": "Fraud Detection"
+        },
+        {
+            "fieldname": "fraud_indicators_checklist",
+            "fieldtype": "Table",
+            "label": "Fraud Indicators Checklist",
+            "options": "Fraud Indicator"
+        },
+        {
+            "default": "0",
+            "fieldname": "fraud_suspected",
+            "fieldtype": "Check",
+            "in_list_view": 1,
+            "label": "Fraud Suspected"
+        },
+        {
+            "fieldname": "column_break_fraud",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "recommendation",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Recommendation",
+            "options": "Approve\nReject\nInvestigate Further",
+            "reqd": 1
+        },
+        {
+            "fieldname": "attachments_section",
+            "fieldtype": "Section Break",
+            "label": "Attachments"
+        },
+        {
+            "fieldname": "verification_report",
+            "fieldtype": "Attach",
+            "label": "Verification Report"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-01-06 00:10:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Claim Verification",
+    "naming_rule": "Expression (old style)",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Claim Verification Agent",
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Claims Officer"
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

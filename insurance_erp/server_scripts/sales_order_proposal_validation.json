@@ -1,0 +1,8 @@
+{
+    "name": "Insurance Proposal - Validation",
+    "doctype_event": "Sales Order",
+    "event_frequency": "Before Submit",
+    "script_type": "DocType Event",
+    "disabled": 0,
+    "script": "# Validate Insurance Proposal before submission\n\nif doc.is_insurance_proposal:\n    # 1. Validate insurance item selected\n    has_insurance_item = False\n    for item in doc.items:\n        item_doc = frappe.get_doc('Item', item.item_code)\n        if item_doc.get('is_insurance_plan'):\n            has_insurance_item = True\n            break\n    \n    if not has_insurance_item:\n        frappe.throw('Please select an Insurance Plan item')\n    \n    # 2. Validate vehicle is linked\n    if not doc.vehicle:\n        frappe.throw('Vehicle is mandatory for Insurance Proposal')\n    \n    # 3. Validate IDV variance (10% allowed)\n    vehicle = frappe.get_doc('Vehicle', doc.vehicle)\n    if abs(doc.vehicle_idv - vehicle.current_idv) / vehicle.current_idv > 0.1:\n        frappe.throw('IDV variance exceeds 10% of vehicle current IDV')\n    \n    # 4. Validate policy duration\n    if not doc.policy_duration_from or not doc.policy_duration_to:\n        frappe.throw('Policy duration dates are mandatory')\n    \n    from dateutil.relativedelta import relativedelta\n    from frappe.utils import getdate\n    \n    duration_start = getdate(doc.policy_duration_from)\n    duration_end = getdate(doc.policy_duration_to)\n    \n    if duration_end < duration_start + relativedelta(months=11):\n        frappe.throw('Minimum policy duration is 12 months')\n    \n    # 5. Validate customer matches vehicle customer\n    if doc.customer != vehicle.customer:\n        frappe.throw('Sales Order customer must match Vehicle customer')"
+}

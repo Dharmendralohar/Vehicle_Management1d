@@ -1,0 +1,248 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "format:VEH-{customer}-{#####}",
+    "creation": "2026-01-06 00:07:00",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "basic_info_section",
+        "customer",
+        "registration_number",
+        "column_break_basic",
+        "chassis_number",
+        "engine_number",
+        "vehicle_details_section",
+        "make",
+        "model",
+        "variant",
+        "column_break_vehicle",
+        "manufacturing_year",
+        "fuel_type",
+        "vehicle_type",
+        "insurance_history_section",
+        "previous_policy_number",
+        "previous_policy_expiry",
+        "column_break_history",
+        "previous_insurer",
+        "valuation_section",
+        "current_idv",
+        "column_break_valuation",
+        "last_idv_update_date"
+    ],
+    "fields": [
+        {
+            "fieldname": "basic_info_section",
+            "fieldtype": "Section Break",
+            "label": "Basic Information"
+        },
+        {
+            "fieldname": "registration_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Registration Number",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "fetch_vehicle_details",
+            "fieldtype": "Button",
+            "label": "Fetch Vehicle Details"
+        },
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Customer",
+            "options": "Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_basic",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "owner_name",
+            "fieldtype": "Data",
+            "label": "Owner Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "registration_date",
+            "fieldtype": "Date",
+            "label": "Registration Date"
+        },
+        {
+            "fieldname": "rc_status",
+            "fieldtype": "Data",
+            "label": "RC Status",
+            "read_only": 1
+        },
+        {
+            "fieldname": "chassis_number",
+            "fieldtype": "Data",
+            "label": "Chassis Number",
+            "unique": 1
+        },
+        {
+            "fieldname": "engine_number",
+            "fieldtype": "Data",
+            "label": "Engine Number"
+        },
+        {
+            "fieldname": "vehicle_details_section",
+            "fieldtype": "Section Break",
+            "label": "Vehicle Details"
+        },
+        {
+            "fieldname": "make",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Make"
+        },
+        {
+            "fieldname": "model",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Model"
+        },
+        {
+            "fieldname": "variant",
+            "fieldtype": "Data",
+            "label": "Variant"
+        },
+        {
+            "fieldname": "column_break_vehicle",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "manufacturing_year",
+            "fieldtype": "Int",
+            "label": "Manufacturing Year"
+        },
+        {
+            "fieldname": "fuel_type",
+            "fieldtype": "Select",
+            "label": "Fuel Type",
+            "options": "Petrol\nDiesel\nCNG\nElectric\nHybrid"
+        },
+        {
+            "fieldname": "vehicle_type",
+            "fieldtype": "Select",
+            "label": "Vehicle Type",
+            "options": "Two Wheeler\nFour Wheeler\nCommercial Vehicle"
+        },
+        {
+            "fieldname": "blacklist_status",
+            "fieldtype": "Data",
+            "label": "Blacklist Status",
+            "read_only": 1
+        },
+        {
+            "fieldname": "commercial_private_flag",
+            "fieldtype": "Data",
+            "label": "Commercial/Private Flag",
+            "read_only": 1
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "insurance_history_section",
+            "fieldtype": "Section Break",
+            "label": "Insurance History"
+        },
+        {
+            "fieldname": "previous_policy_number",
+            "fieldtype": "Data",
+            "label": "Previous Policy Number"
+        },
+        {
+            "fieldname": "previous_policy_expiry",
+            "fieldtype": "Date",
+            "label": "Previous Policy Expiry"
+        },
+        {
+            "fieldname": "column_break_history",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "previous_insurer",
+            "fieldtype": "Data",
+            "label": "Previous Insurer"
+        },
+        {
+            "fieldname": "valuation_section",
+            "fieldtype": "Section Break",
+            "label": "Valuation"
+        },
+        {
+            "fieldname": "current_idv",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Current IDV (Insured Declared Value)",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_valuation",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "Today",
+            "fieldname": "last_idv_update_date",
+            "fieldtype": "Date",
+            "label": "Last IDV Update Date"
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "system_info_section",
+            "fieldtype": "Section Break",
+            "label": "System Information"
+        },
+        {
+            "fieldname": "rc_raw_data",
+            "fieldtype": "Code",
+            "label": "RC Raw Data",
+            "options": "JSON",
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-01-07 12:22:09.636038",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Vehicle",
+    "naming_rule": "Expression",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Insurance Agent",
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance Customer"
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "select": 1,
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "registration_number",
+    "track_changes": 1
+}

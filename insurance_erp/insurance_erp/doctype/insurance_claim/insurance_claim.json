@@ -1,0 +1,255 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "field:claim_number",
+    "creation": "2026-01-06 00:10:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "policy_information_section",
+        "customer",
+        "policy",
+        "vehicle",
+        "column_break_policy_info",
+        "policy_number",
+        "policy_start_date",
+        "policy_end_date",
+        "claim_details_section",
+        "claim_number",
+        "date_of_loss",
+        "claim_registration_date",
+        "column_break_claim",
+        "coverage_type",
+        "status",
+        "incident_description",
+        "claim_amount_section",
+        "claim_amount",
+        "column_break_amount",
+        "approved_amount",
+        "fraud_section",
+        "fraud_suspected",
+        "column_break_fraud",
+        "rejection_reason",
+        "linked_documents_section",
+        "survey",
+        "column_break_linked",
+        "verification",
+        "settlement_journal_entry"
+    ],
+    "fields": [
+        {
+            "fieldname": "policy_information_section",
+            "fieldtype": "Section Break",
+            "label": "Policy Information"
+        },
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Customer",
+            "options": "Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "policy",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Policy",
+            "options": "Insurance Policy",
+            "reqd": 1
+        },
+        {
+            "fetch_from": "policy.vehicle",
+            "fieldname": "vehicle",
+            "fieldtype": "Link",
+            "label": "Vehicle",
+            "options": "Vehicle",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_policy_info",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "policy.policy_number",
+            "fieldname": "policy_number",
+            "fieldtype": "Data",
+            "label": "Policy Number",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "policy.policy_start_date",
+            "fieldname": "policy_start_date",
+            "fieldtype": "Date",
+            "label": "Policy Start Date",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "policy.policy_end_date",
+            "fieldname": "policy_end_date",
+            "fieldtype": "Date",
+            "label": "Policy End Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "claim_details_section",
+            "fieldtype": "Section Break",
+            "label": "Claim Details"
+        },
+        {
+            "fieldname": "claim_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Claim Number",
+            "read_only": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "date_of_loss",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Date of Loss",
+            "reqd": 1
+        },
+        {
+            "default": "Today",
+            "fieldname": "claim_registration_date",
+            "fieldtype": "Date",
+            "label": "Claim Registration Date"
+        },
+        {
+            "fieldname": "column_break_claim",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "coverage_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Coverage Type",
+            "options": "Own Damage (OD)\nThird Party (TP)\nFire\nTheft\nFlood\nPersonal Accident\nPassenger Cover\nZero Depreciation",
+            "reqd": 1
+        },
+        {
+            "default": "Reported",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Claim Status",
+            "options": "Reported\nSurvey Assigned\nSurvey Completed\nVerification Assigned\nAgent Verified\nApproved\nRejected\nSettled"
+        },
+        {
+            "fieldname": "incident_description",
+            "fieldtype": "Text",
+            "label": "Incident Description"
+        },
+        {
+            "fieldname": "claim_amount_section",
+            "fieldtype": "Section Break",
+            "label": "Claim Amount"
+        },
+        {
+            "fieldname": "claim_amount",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Claim Amount",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_amount",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "approved_amount",
+            "fieldtype": "Currency",
+            "label": "Approved Amount",
+            "permlevel": 1
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "fraud_section",
+            "fieldtype": "Section Break",
+            "label": "Fraud Detection"
+        },
+        {
+            "default": "0",
+            "fieldname": "fraud_suspected",
+            "fieldtype": "Check",
+            "label": "Fraud Suspected"
+        },
+        {
+            "fieldname": "column_break_fraud",
+            "fieldtype": "Column Break"
+        },
+        {
+            "depends_on": "eval:doc.claim_status=='Rejected'",
+            "fieldname": "rejection_reason",
+            "fieldtype": "Text",
+            "label": "Rejection Reason"
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "linked_documents_section",
+            "fieldtype": "Section Break",
+            "label": "Linked Documents"
+        },
+        {
+            "fieldname": "survey",
+            "fieldtype": "Link",
+            "label": "Survey",
+            "options": "Claim Survey",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_linked",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "verification",
+            "fieldtype": "Link",
+            "label": "Verification",
+            "options": "Claim Verification",
+            "read_only": 1
+        },
+        {
+            "fieldname": "settlement_journal_entry",
+            "fieldtype": "Link",
+            "label": "Settlement Journal Entry",
+            "options": "Journal Entry",
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-01-06 00:10:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance Claim",
+    "naming_rule": "By fieldname",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "read": 1,
+            "role": "Claims Officer",
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "permlevel": 1,
+            "read": 1,
+            "role": "Claims Officer",
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance Customer"
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "claim_number",
+    "track_changes": 1
+}
