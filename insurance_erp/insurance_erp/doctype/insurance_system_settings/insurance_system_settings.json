@@ -1,13 +1,13 @@
 {
     "actions": [],
     "allow_rename": 1,
-    "creation": "2026-01-06 00:07:00.000000",
+    "creation": "2026-01-09 00:00:00.000000",
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
         "policy_settings_section",
         "policy_naming_series",
-        "grace_period_days",
+        "grace_period",
         "column_break_policy",
         "max_claims_per_policy",
         "max_claim_percent_of_idv",
@@ -20,6 +20,15 @@
         "require_verification_before_approval",
         "column_break_verification",
         "block_approval_on_fraud_suspected",
+        "api_configuration_section",
+        "enable_vehicle_rc_verification",
+        "rc_verification_provider",
+        "cashfree_client_id",
+        "cashfree_client_secret",
+        "column_break_api",
+        "cashfree_environment",
+        "rc_api_timeout",
+        "block_proposal_if_rc_invalid",
         "email_rules_section",
         "notify_customer_on_policy_activation",
         "notify_customer_on_claim_status_change",
@@ -33,30 +42,25 @@
             "label": "Policy Settings"
         },
         {
-            "default": "POL-.YYYY.-.#####",
             "fieldname": "policy_naming_series",
-            "fieldtype": "Select",
-            "label": "Policy Naming Series",
-            "options": "POL-.YYYY.-.#####\nPOL-.####"
+            "fieldtype": "Data",
+            "label": "Policy Naming Series"
         },
         {
-            "default": "15",
-            "fieldname": "grace_period_days",
+            "fieldname": "grace_period",
             "fieldtype": "Int",
-            "label": "Grace Period (Days)"
+            "label": "Grace Period (days)"
         },
         {
             "fieldname": "column_break_policy",
             "fieldtype": "Column Break"
         },
         {
-            "default": "3",
             "fieldname": "max_claims_per_policy",
             "fieldtype": "Int",
             "label": "Max Claims per Policy"
         },
         {
-            "default": "100",
             "fieldname": "max_claim_percent_of_idv",
             "fieldtype": "Float",
             "label": "Max Claim % of IDV"
@@ -67,21 +71,18 @@
             "label": "Claim Settings"
         },
         {
-            "default": "CLM-.YYYY.-.#####",
             "fieldname": "claim_naming_series",
-            "fieldtype": "Select",
-            "label": "Claim Naming Series",
-            "options": "CLM-.YYYY.-.#####\nCLM-.####"
+            "fieldtype": "Data",
+            "label": "Claim Naming Series"
         },
         {
             "fieldname": "column_break_claim",
             "fieldtype": "Column Break"
         },
         {
-            "default": "30",
             "fieldname": "default_claim_waiting_period",
             "fieldtype": "Int",
-            "label": "Default Claim Waiting Period (Days)"
+            "label": "Default Claim Waiting Period (days)"
         },
         {
             "fieldname": "verification_rules_section",
@@ -89,13 +90,13 @@
             "label": "Verification Rules"
         },
         {
-            "default": "1",
+            "default": "0",
             "fieldname": "require_survey_before_approval",
             "fieldtype": "Check",
             "label": "Require Survey Before Approval"
         },
         {
-            "default": "1",
+            "default": "0",
             "fieldname": "require_verification_before_approval",
             "fieldtype": "Check",
             "label": "Require Verification Before Approval"
@@ -105,24 +106,73 @@
             "fieldtype": "Column Break"
         },
         {
-            "default": "1",
+            "default": "0",
             "fieldname": "block_approval_on_fraud_suspected",
             "fieldtype": "Check",
             "label": "Block Approval on Fraud Suspected"
         },
         {
-            "fieldname": "email_rules_section",
+            "fieldname": "api_configuration_section",
             "fieldtype": "Section Break",
-            "label": "Email Rules"
+            "label": "API Configuration"
         },
         {
-            "default": "1",
+            "default": "0",
+            "fieldname": "enable_vehicle_rc_verification",
+            "fieldtype": "Check",
+            "label": "Enable Vehicle RC Verification"
+        },
+        {
+            "fieldname": "rc_verification_provider",
+            "fieldtype": "Select",
+            "label": "RC Verification Provider",
+            "options": "Cashfree\nOther"
+        },
+        {
+            "fieldname": "cashfree_client_id",
+            "fieldtype": "Password",
+            "label": "Cashfree Client ID"
+        },
+        {
+            "fieldname": "cashfree_client_secret",
+            "fieldtype": "Password",
+            "label": "Cashfree Client Secret"
+        },
+        {
+            "fieldname": "column_break_api",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "cashfree_environment",
+            "fieldtype": "Select",
+            "label": "Cashfree Environment",
+            "options": "Sandbox\nProduction"
+        },
+        {
+            "default": "30",
+            "fieldname": "rc_api_timeout",
+            "fieldtype": "Int",
+            "label": "RC API Timeout (seconds)"
+        },
+        {
+            "default": "0",
+            "fieldname": "block_proposal_if_rc_invalid",
+            "fieldtype": "Check",
+            "label": "Block Proposal if RC Invalid"
+        },
+        {
+            "fieldname": "email_rules_section",
+            "fieldtype": "Section Break",
+            "label": "Email & Notification Rules"
+        },
+        {
+            "default": "0",
             "fieldname": "notify_customer_on_policy_activation",
             "fieldtype": "Check",
             "label": "Notify Customer on Policy Activation"
         },
         {
-            "default": "1",
+            "default": "0",
             "fieldname": "notify_customer_on_claim_status_change",
             "fieldtype": "Check",
             "label": "Notify Customer on Claim Status Change"
@@ -141,7 +191,7 @@
     "index_web_pages_for_search": 1,
     "issingle": 1,
     "links": [],
-    "modified": "2026-01-06 00:07:00.000000",
+    "modified": "2026-01-09 00:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance System Settings",
@@ -149,6 +199,7 @@
     "permissions": [
         {
             "create": 1,
+            "delete": 1,
             "read": 1,
             "role": "System Manager",
             "write": 1

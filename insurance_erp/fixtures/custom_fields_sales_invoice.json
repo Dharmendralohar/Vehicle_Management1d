@@ -1,0 +1,69 @@
+[
+    {
+        "fieldname": "is_insurance_policy",
+        "label": "Is Insurance Policy",
+        "fieldtype": "Check",
+        "insert_after": "customer"
+    },
+    {
+        "fieldname": "insurance_plan",
+        "label": "Insurance Plan",
+        "fieldtype": "Link",
+        "options": "Insurance Plan",
+        "insert_after": "is_insurance_policy",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "policy_number",
+        "label": "Policy Number",
+        "fieldtype": "Data",
+        "read_only": 1,
+        "insert_after": "insurance_plan",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "policy_start_date",
+        "label": "Policy Start Date",
+        "fieldtype": "Date",
+        "insert_after": "policy_number",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "policy_end_date",
+        "label": "Policy End Date",
+        "fieldtype": "Date",
+        "insert_after": "policy_start_date",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "policy_status",
+        "label": "Policy Status",
+        "fieldtype": "Select",
+        "options": "Pending Payment\nActive\nLapsed\nCancelled\nExpired",
+        "insert_after": "policy_end_date",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "vehicle",
+        "label": "Vehicle",
+        "fieldtype": "Link",
+        "options": "Vehicle",
+        "insert_after": "policy_status",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "idv",
+        "label": "IDV",
+        "fieldtype": "Currency",
+        "insert_after": "vehicle",
+        "depends_on": "eval:doc.is_insurance_policy"
+    },
+    {
+        "fieldname": "policy_coverage_snapshot",
+        "label": "Policy Coverage Snapshot",
+        "fieldtype": "Table",
+        "options": "Policy Coverage Snapshot",
+        "insert_after": "idv",
+        "depends_on": "eval:doc.is_insurance_policy"
+    }
+]

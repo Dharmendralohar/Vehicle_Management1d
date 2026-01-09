@@ -2,7 +2,7 @@
     "actions": [],
     "allow_rename": 1,
     "autoname": "field:plan_name",
-    "creation": "2026-01-06 00:55:00.000000",
+    "creation": "2026-01-09 00:00:00.000000",
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
@@ -12,10 +12,9 @@
         "policy_type",
         "is_active",
         "pricing_section",
-        "base_premium",
         "max_claim_percent_of_idv",
-        "column_break_pricing",
         "deductible_amount",
+        "column_break_pricing",
         "waiting_period_days",
         "coverage_section",
         "coverage_types",
@@ -58,12 +57,7 @@
         {
             "fieldname": "pricing_section",
             "fieldtype": "Section Break",
-            "label": "Pricing"
-        },
-        {
-            "fieldname": "base_premium",
-            "fieldtype": "Currency",
-            "label": "Base Premium"
+            "label": "Pricing & Rules"
         },
         {
             "default": "100",
@@ -72,13 +66,13 @@
             "label": "Max Claim % of IDV"
         },
         {
-            "fieldname": "column_break_pricing",
-            "fieldtype": "Column Break"
-        },
-        {
             "fieldname": "deductible_amount",
             "fieldtype": "Currency",
             "label": "Deductible Amount"
+        },
+        {
+            "fieldname": "column_break_pricing",
+            "fieldtype": "Column Break"
         },
         {
             "default": "0",
@@ -89,7 +83,7 @@
         {
             "fieldname": "coverage_section",
             "fieldtype": "Section Break",
-            "label": "Coverage Types"
+            "label": "Coverage Details"
         },
         {
             "fieldname": "coverage_types",
@@ -111,7 +105,7 @@
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2026-01-06 00:55:00.000000",
+    "modified": "2026-01-09 00:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance Plan",
@@ -122,14 +116,19 @@
             "create": 1,
             "delete": 1,
             "read": 1,
-            "role": "Insurance System Admin",
+            "role": "System Manager",
             "write": 1
         },
         {
             "create": 1,
+            "delete": 1,
             "read": 1,
-            "role": "Insurance Agent",
+            "role": "Insurance System Admin",
             "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance Agent"
         }
     ],
     "sort_field": "modified",
