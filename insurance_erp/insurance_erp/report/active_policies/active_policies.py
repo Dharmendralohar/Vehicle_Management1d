@@ -19,10 +19,11 @@ def execute(filters=None):
 			"width": 180
 		},
 		{
-			"fieldname": "registration_number",
+			"fieldname": "registration_no",
 			"label": "Vehicle",
-			"fieldtype": "Data",
-			"width": 120
+			"fieldtype": "Link",
+			"options": "Vehicle",
+			"width": 150
 		},
 		{
 			"fieldname": "policy_start_date",
@@ -37,7 +38,7 @@ def execute(filters=None):
 			"width": 100
 		},
 		{
-			"fieldname": "grand_total",
+			"fieldname": "premium_amount",
 			"label": "Premium",
 			"fieldtype": "Currency",
 			"width": 120
@@ -50,20 +51,10 @@ def execute(filters=None):
 		}
 	]
 	
-	data = frappe.db.sql("""
-		SELECT 
-			si.policy_number,
-			si.customer,
-			v.registration_number,
-			si.policy_start_date,
-			si.policy_end_date,
-			si.grand_total,
-			si.policy_status
-		FROM `tabSales Invoice` si
-		LEFT JOIN `tabVehicle` v ON si.vehicle = v.name
-		WHERE si.is_insurance_policy = 1
-		AND si.policy_status = 'Active'
-		ORDER BY si.policy_end_date
-	""", as_dict=1)
+	data = frappe.get_all("Insurance Policy",
+		filters={"status": "Active"},
+		fields=["name as policy_number", "customer", "vehicle as registration_no", "policy_start_date", "policy_end_date", "premium_amount", "status"],
+		order_by="policy_end_date"
+	)
 	
 	return columns, data

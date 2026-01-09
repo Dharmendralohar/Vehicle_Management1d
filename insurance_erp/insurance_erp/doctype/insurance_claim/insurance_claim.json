@@ -50,8 +50,8 @@
         {
             "fieldname": "policy",
             "fieldtype": "Link",
-            "label": "Policy (Sales Invoice)",
-            "options": "Sales Invoice",
+            "label": "Policy",
+            "options": "Insurance Policy",
             "reqd": 1
         },
         {

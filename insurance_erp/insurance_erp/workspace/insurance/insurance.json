@@ -1,0 +1,27 @@
+{
+    "charts": [
+        {
+            "chart_name": "Active Policies by Plan",
+            "label": "Active Policies by Plan"
+        },
+        {
+            "chart_name": "Claims by Status",
+            "label": "Claims by Status"
+        }
+    ],
+    "content": "{\"rows\":[{\"columns\":[{\"content\":{\"type\":\"chart\",\"chart_name\":\"Active Policies by Plan\"},\"width\":12}]},{\"columns\":[{\"content\":{\"type\":\"chart\",\"chart_name\":\"Claims by Status\"},\"width\":12}]},{\"columns\":[{\"content\":{\"type\":\"links\",\"links\":[{\"label\":\"Transactions\",\"links\":[{\"link_to\":\"Insurance Proposal\",\"label\":\"Insurance Proposal\",\"type\":\"DocType\"},{\"link_to\":\"Insurance Policy\",\"label\":\"Insurance Policy\",\"type\":\"DocType\"},{\"link_to\":\"Insurance Claim\",\"label\":\"Insurance Claim\",\"type\":\"DocType\"}]},{\"label\":\"Masters\",\"links\":[{\"link_to\":\"Vehicle\",\"label\":\"Vehicle\",\"type\":\"DocType\"},{\"link_to\":\"Insurance Plan\",\"label\":\"Insurance Plan\",\"type\":\"DocType\"}]},{\"label\":\"Verification\",\"links\":[{\"link_to\":\"Claim Survey\",\"label\":\"Claim Survey\",\"type\":\"DocType\"},{\"link_to\":\"Claim Verification\",\"label\":\"Claim Verification\",\"type\":\"DocType\"}]},{\"label\":\"Reports\",\"links\":[{\"link_to\":\"Active Policies\",\"label\":\"Active Policies\",\"type\":\"Report\"},{\"link_to\":\"Claims Summary\",\"label\":\"Claims Summary\",\"type\":\"Report\"},{\"link_to\":\"Settlement Summary\",\"label\":\"Settlement Summary\",\"type\":\"Report\"}]}]},\"width\":12}]}]}",
+    "creation": "2026-01-09 00:00:00.000000",
+    "docstatus": 0,
+    "doctype": "Workspace",
+    "icon": "shield",
+    "idx": 0,
+    "is_standard": 1,
+    "label": "Insurance",
+    "modified": "2026-01-09 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Insurance",
+    "owner": "Administrator",
+    "public": 1,
+    "title": "Insurance"
+}

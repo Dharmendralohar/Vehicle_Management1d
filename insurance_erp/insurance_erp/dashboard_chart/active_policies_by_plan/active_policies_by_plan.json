@@ -1,0 +1,22 @@
+{
+    "based_on": "insurance_plan",
+    "chart_name": "Active Policies by Plan",
+    "chart_type": "Count",
+    "creation": "2026-01-09 00:00:00.000000",
+    "docstatus": 0,
+    "doctype": "Dashboard Chart",
+    "document_type": "Insurance Policy",
+    "filters_json": "[[\"Insurance Policy\",\"status\",\"=\",\"Active\",false]]",
+    "group_by_type": "Count",
+    "idx": 0,
+    "is_public": 1,
+    "is_standard": 1,
+    "modified": "2026-01-09 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Active Policies by Plan",
+    "owner": "Administrator",
+    "parent_doctype": "Insurance Policy",
+    "report_name": "Active Policies",
+    "type": "Donut"
+}

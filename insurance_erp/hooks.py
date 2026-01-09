@@ -143,12 +143,6 @@ doc_events = {
 	},
 	"Journal Entry": {
 		"after_submit": "insurance_erp.events.handle_journal_entry_submission"
-	},
-	"Sales Order": {
-		"before_submit": "insurance_erp.events.handle_sales_order_before_submit"
-	},
-	"Sales Invoice": {
-		"before_insert": "insurance_erp.events.handle_sales_invoice_before_insert"
 	}
 }
 

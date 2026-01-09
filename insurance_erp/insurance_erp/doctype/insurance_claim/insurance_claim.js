@@ -1,67 +1,30 @@
+// Copyright (c) 2026, Insurance Solutions Inc and contributors
+// For license information, please see license.txt
+
 frappe.ui.form.on('Insurance Claim', {
     refresh: function (frm) {
-        // Set query for policy to show only Active or Expired policies (claims can sometimes be backdated)
-        frm.set_query('policy', function () {
-            return {
-                filters: [
-                    ['Insurance Policy', 'status', 'in', ['Active', 'Expired']]
-                ]
-            };
-        });
-
-        // Dynamic Filtering for Coverage Type
-        if (frm.doc.policy) {
-            frm.trigger('set_coverage_filters');
+        if (frm.doc.claim_status === 'Approved' && !frm.doc.settlement_journal_entry) {
+            frm.add_custom_button(__('Create Settlement JE'), function () {
+                frappe.call({
+                    method: "insurance_erp.insurance_erp.doctype.insurance_claim.insurance_claim.create_settlement_je",
+                    args: {
+                        claim_name: frm.doc.name
+                    }
+                });
+            }, __('Actions'));
         }
     },
 
     policy: function (frm) {
         if (frm.doc.policy) {
-            // Trigger fetch from policy snapshot
-            frappe.model.with_doc('Insurance Policy', frm.doc.policy, function () {
-                let policy = frappe.get_doc('Insurance Policy', frm.doc.policy);
-
-                // Customer and Vehicle are already fetched via fetch_from in JSON
-                // But we need to handle Coverage Type options
-                frm.trigger('set_coverage_filters');
+            // Field fetching logic is already in the server-side before_insert/validate, 
+            // but we can add immediate fetching for UX
+            frappe.db.get_doc('Insurance Policy', frm.doc.policy).then(policy => {
+                frm.set_value('customer', policy.customer);
+                frm.set_value('vehicle', policy.vehicle);
+                frm.set_value('policy_number', policy.policy_number);
+                frm.set_value('insurance_plan', policy.insurance_plan);
             });
-        }
-    },
-
-    set_coverage_filters: function (frm) {
-        // Fetch coverage types from the policy snapshot and update the Select field
-        frappe.call({
-            method: 'frappe.client.get_value',
-            args: {
-                doctype: 'Insurance Policy',
-                filters: { name: frm.doc.policy },
-                fieldname: 'name'
-            },
-            callback: function (r) {
-                // We use frappe.model.get_doc to get the child table
-                let policy = frappe.get_doc('Insurance Policy', frm.doc.policy);
-                if (policy && policy.coverage_snapshot) {
-                    let coverages = policy.coverage_snapshot.map(c => c.coverage_type);
-                    frm.set_df_property('coverage_type', 'options', coverages.join('\n'));
-                }
-            }
-        });
-    },
-
-    date_of_loss: function (frm) {
-        if (frm.doc.date_of_loss && frm.doc.policy_start_date && frm.doc.policy_end_date) {
-            let dol = frappe.datetime.str_to_obj(frm.doc.date_of_loss);
-            let start = frappe.datetime.str_to_obj(frm.doc.policy_start_date);
-            let end = frappe.datetime.str_to_obj(frm.doc.policy_end_date);
-
-            if (dol < start || dol > end) {
-                frappe.msgprint({
-                    title: __('Validation Error'),
-                    message: __('Date of Loss must be within Policy Period ({0} to {1})').format(frm.doc.policy_start_date, frm.doc.policy_end_date),
-                    indicator: 'red'
-                });
-                frm.set_value('date_of_loss', '');
-            }
         }
     }
 });
