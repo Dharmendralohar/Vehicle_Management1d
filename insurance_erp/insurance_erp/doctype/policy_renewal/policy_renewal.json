@@ -1,0 +1,43 @@
+{
+    "doctype": "DocType",
+    "name": "Policy Renewal",
+    "module": "Insurance Erp",
+    "custom": 0,
+    "fields": [
+        {
+            "label": "Original Policy",
+            "fieldname": "insurance_policy",
+            "fieldtype": "Link",
+            "options": "Insurance Policy",
+            "reqd": 1
+        },
+        {
+            "label": "Renewal Proposal",
+            "fieldname": "renewal_proposal",
+            "fieldtype": "Link",
+            "options": "Insurance Proposal",
+            "read_only": 1
+        },
+        {
+            "label": "Status",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "options": "Pending\nProposal Created\nRenewed",
+            "default": "Pending"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Insurance Agent",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        }
+    ]
+}

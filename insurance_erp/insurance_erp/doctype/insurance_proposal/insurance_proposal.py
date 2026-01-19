@@ -141,6 +141,16 @@ def create_policy_from_proposal(proposal_name):
 	policy.addon_premium = proposal.addon_premium
 	policy.tax_amount = proposal.tax_amount
 	policy.total_premium_payable = proposal.total_premium_payable
+	# Copy Coverages from Plan
+	if proposal.insurance_plan:
+		plan = frappe.get_doc("Insurance Plan", proposal.insurance_plan)
+		for item in plan.coverage_types:
+			policy.append("coverage_snapshot", {
+				"coverage_type": item.coverage_type,
+				"limit_type": item.limit_type,
+				"limit_value": item.limit_value,
+				"deductible": item.deductible
+			})
 	
 	# Set directly to Active as payment is done
 	policy.status = "Active"
@@ -161,10 +171,20 @@ def create_proposal_payment_entry(proposal_name):
     pe.paid_amount = proposal.total_premium_payable
     pe.received_amount = proposal.total_premium_payable
     pe.reference_no = proposal.name
+    pe.reference_no = proposal.name
     pe.reference_date = today()
+    pe.target_exchange_rate = 1.0
     
-    # Set default Bank Account if available (optional)
-    # pe.paid_to = ... 
+    # Set Bank Account
+    company = frappe.defaults.get_user_default("Company") or frappe.db.get_single_value("Global Defaults", "default_company")
+    pe.company = company
+    
+    bank_account = frappe.db.get_value("Account", {"account_type": "Bank", "company": company, "is_group": 0})
+    if not bank_account:
+        bank_account = frappe.db.get_value("Account", {"account_type": "Cash", "company": company, "is_group": 0})
+        
+    pe.paid_to = bank_account
+    pe.paid_to_account_currency = frappe.db.get_value("Account", bank_account, "account_currency") or "INR"
 
     pe.insert(ignore_permissions=True)
     return pe.name

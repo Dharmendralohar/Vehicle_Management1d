@@ -17,3 +17,9 @@ doc_events = {
         "on_submit": "insurance_erp.events.handle_journal_entry_submission"
     }
 }
+# Scheduled Tasks
+scheduler_events = {
+	"daily": [
+		"insurance_erp.insurance_erp.doctype.policy_renewal.policy_renewal.check_for_renewals"
+	]
+}

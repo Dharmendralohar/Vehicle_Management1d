@@ -1,0 +1,70 @@
+{
+    "doctype": "DocType",
+    "name": "Policy Endorsement",
+    "module": "Insurance Erp",
+    "custom": 0,
+    "is_submittable": 1,
+    "fields": [
+        {
+            "label": "Basic Details",
+            "fieldname": "basic_section",
+            "fieldtype": "Section Break"
+        },
+        {
+            "label": "Insurance Policy",
+            "fieldname": "insurance_policy",
+            "fieldtype": "Link",
+            "options": "Insurance Policy",
+            "reqd": 1
+        },
+        {
+            "label": "Endorsement Date",
+            "fieldname": "endorsement_date",
+            "fieldtype": "Date",
+            "default": "Today",
+            "reqd": 1
+        },
+        {
+            "label": "Changes",
+            "fieldname": "changes_section",
+            "fieldtype": "Section Break"
+        },
+        {
+            "label": "New Nominee",
+            "fieldname": "new_nominee",
+            "fieldtype": "Data",
+            "description": "Enter new nominee name if changing"
+        },
+        {
+            "label": "Address Change",
+            "fieldname": "new_address",
+            "fieldtype": "Small Text"
+        },
+        {
+            "label": "Financials",
+            "fieldname": "financial_section",
+            "fieldtype": "Section Break"
+        },
+        {
+            "label": "Additional Premium",
+            "fieldname": "additional_premium",
+            "fieldtype": "Currency",
+            "default": 0
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1
+        },
+        {
+            "role": "Insurance Agent",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        }
+    ]
+}

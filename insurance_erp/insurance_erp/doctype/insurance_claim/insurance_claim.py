@@ -28,7 +28,7 @@ class InsuranceClaim(Document):
 
 	def validate_mandatory_claim_data(self):
 		"""Ensure all Indian standard claim fields are populated"""
-		mandatory = ["policy", "claim_date", "loss_date", "nature_of_loss", "claim_amount"]
+		mandatory = ["policy", "claim_registration_date", "date_of_loss", "nature_of_loss", "claim_amount"]
 		for field in mandatory:
 			if not self.get(field):
 				frappe.throw(_("Field {0} is mandatory for Claim").format(self.meta.get_label(field)))
@@ -40,37 +40,30 @@ class InsuranceClaim(Document):
 			frappe.throw(_("Claims can only be filed against Active policies. Current policy status: {0}").format(policy.status))
 
 	def validate_dates(self):
-		"""Validate loss date against policy validity and claim date"""
+		"""Ensure claim dates are valid w.r.t policy period"""
 		policy = frappe.get_doc("Insurance Policy", self.policy)
 		
 		# Loss date within policy period
-		if getdate(self.loss_date) < getdate(policy.policy_start_date) or \
-			getdate(self.loss_date) > getdate(policy.policy_end_date):
-			frappe.throw(_("Loss Date {0} is outside the Policy Period ({1} to {2})").format(
-				self.loss_date, policy.policy_start_date, policy.policy_end_date
+		if getdate(self.date_of_loss) < getdate(policy.policy_start_date) or \
+		   getdate(self.date_of_loss) > getdate(policy.policy_end_date):
+			frappe.throw(_("Date of Loss ({0}) must be within Policy Period ({1} to {2})").format(
+				self.date_of_loss, policy.policy_start_date, policy.policy_end_date
 			))
 		
 		# Loss date before claim date
-		if getdate(self.loss_date) > getdate(self.claim_date):
+		if getdate(self.date_of_loss) > getdate(self.claim_registration_date):
 			frappe.throw(_("Loss Date cannot be after Claim Date"))
 
 	def validate_coverage(self):
 		"""Verify that the nature of loss is covered by the policy snapshot"""
 		policy = frappe.get_doc("Insurance Policy", self.policy)
-		plan_snapshot = json.loads(policy.plan_snapshot_json) if policy.plan_snapshot_json else {}
 		
-		# If it's a standard cover, check coverage_snapshot table on policy
+		# Check coverage_snapshot table on policy
 		found = False
 		for row in policy.get("coverage_snapshot", []):
 			if row.coverage_type == self.nature_of_loss:
 				found = True
 				break
-		
-		# Also check plan snapshots for specific categories
-		if not found:
-			# Fallback or specific logic for mandatory covers (OD/TP)
-			if self.nature_of_loss in ["Own Damage", "Third Party Liability"]:
-				found = True
 		
 		if not found:
 			frappe.msgprint(_("Warning: Nature of Loss '{0}' might not be explicitly listed in policy coverage snapshot.").format(self.nature_of_loss))
