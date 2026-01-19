@@ -110,6 +110,15 @@ def create_policy_from_proposal(proposal_name):
 	existing_policy = frappe.db.exists("Insurance Policy", {"insurance_proposal": proposal_name})
 	if existing_policy:
 		frappe.throw(_("A policy already exists for this proposal: {0}").format(existing_policy))
+
+    # Check for Payment
+	payment_exists = frappe.db.exists("Payment Entry", {
+        "reference_no": proposal_name, 
+        "docstatus": 1
+    })
+	
+	if not payment_exists:
+		frappe.throw(_("No submitted Payment Entry found for Proposal {0}. Please record payment first.").format(proposal_name))
 	
 	policy = frappe.new_doc("Insurance Policy")
 	policy.customer = proposal.customer
@@ -133,9 +142,29 @@ def create_policy_from_proposal(proposal_name):
 	policy.tax_amount = proposal.tax_amount
 	policy.total_premium_payable = proposal.total_premium_payable
 	
-	policy.status = "Pending Payment"
+	# Set directly to Active as payment is done
+	policy.status = "Active"
 	
 	policy.insert(ignore_permissions=True)
 	frappe.db.commit()
 	
 	return policy.name
+
+@frappe.whitelist()
+def create_proposal_payment_entry(proposal_name):
+    proposal = frappe.get_doc("Insurance Proposal", proposal_name)
+    
+    pe = frappe.new_doc("Payment Entry")
+    pe.payment_type = "Receive"
+    pe.party_type = "Customer"
+    pe.party = proposal.customer
+    pe.paid_amount = proposal.total_premium_payable
+    pe.received_amount = proposal.total_premium_payable
+    pe.reference_no = proposal.name
+    pe.reference_date = today()
+    
+    # Set default Bank Account if available (optional)
+    # pe.paid_to = ... 
+
+    pe.insert(ignore_permissions=True)
+    return pe.name

@@ -1,0 +1,46 @@
+<script type="text/template" id="all_policies">
+<div class="row">
+    <div class="col-md-12">
+        <div class="frappe-card">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-muted">
+                        <tr>
+                            <th>Policy Number</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Vehicle</th>
+                            <th class="text-right">Premium Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in policies %}
+                        <tr class="policy-row" data-name="{{ p.name }}" style="cursor: pointer;">
+                            <td class="font-weight-bold text-primary">{{ p.name }}</td>
+                            <td>{{ p.customer }}</td>
+                            <td>
+                                <span class="indicator-pill {{ p.status_class }}">
+                                    {{ p.status }}
+                                </span>
+                            </td>
+                            <td>{{ frappe.datetime.str_to_user(p.policy_start_date) }}</td>
+                            <td>{{ frappe.datetime.str_to_user(p.policy_end_date) }}</td>
+                            <td>{{ p.vehicle or '-' }}</td>
+                            <td class="text-right">{{ format_currency(p.premium_paid) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted p-5">
+                                No Policies Found.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
