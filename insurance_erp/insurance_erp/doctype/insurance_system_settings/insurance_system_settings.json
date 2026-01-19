@@ -11,24 +11,18 @@
         "column_break_policy",
         "max_claims_per_policy",
         "max_claim_percent_of_idv",
-        "claim_settings_section",
-        "claim_naming_series",
-        "column_break_claim",
-        "default_claim_waiting_period",
+        "legal_compliance_section",
+        "limits_of_liability",
+        "usage_restrictions",
+        "column_break_compliance",
+        "driver_clauses",
+        "insurance_act_declaration",
+        "motor_vehicle_act_reference",
         "verification_rules_section",
         "require_survey_before_approval",
         "require_verification_before_approval",
         "column_break_verification",
         "block_approval_on_fraud_suspected",
-        "api_configuration_section",
-        "enable_vehicle_rc_verification",
-        "rc_verification_provider",
-        "cashfree_client_id",
-        "cashfree_client_secret",
-        "column_break_api",
-        "cashfree_environment",
-        "rc_api_timeout",
-        "block_proposal_if_rc_invalid",
         "email_rules_section",
         "notify_customer_on_policy_activation",
         "notify_customer_on_claim_status_change",
@@ -44,45 +38,72 @@
         {
             "fieldname": "policy_naming_series",
             "fieldtype": "Data",
-            "label": "Policy Naming Series"
+            "label": "Policy Naming Series",
+            "reqd": 1
         },
         {
+            "default": "30",
             "fieldname": "grace_period",
             "fieldtype": "Int",
-            "label": "Grace Period (days)"
+            "label": "Grace Period (days)",
+            "reqd": 1
         },
         {
             "fieldname": "column_break_policy",
             "fieldtype": "Column Break"
         },
         {
+            "default": "1",
             "fieldname": "max_claims_per_policy",
             "fieldtype": "Int",
-            "label": "Max Claims per Policy"
+            "label": "Max Claims per Policy",
+            "reqd": 1
         },
         {
+            "default": "100",
             "fieldname": "max_claim_percent_of_idv",
             "fieldtype": "Float",
-            "label": "Max Claim % of IDV"
+            "label": "Max Claim % of IDV",
+            "reqd": 1
         },
         {
-            "fieldname": "claim_settings_section",
+            "fieldname": "legal_compliance_section",
             "fieldtype": "Section Break",
-            "label": "Claim Settings"
+            "label": "Legal & Compliance (Mandatory)"
         },
         {
-            "fieldname": "claim_naming_series",
-            "fieldtype": "Data",
-            "label": "Claim Naming Series"
+            "fieldname": "limits_of_liability",
+            "fieldtype": "Small Text",
+            "label": "Limits of Liability",
+            "reqd": 1
         },
         {
-            "fieldname": "column_break_claim",
+            "fieldname": "usage_restrictions",
+            "fieldtype": "Small Text",
+            "label": "Usage Restrictions",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_compliance",
             "fieldtype": "Column Break"
         },
         {
-            "fieldname": "default_claim_waiting_period",
-            "fieldtype": "Int",
-            "label": "Default Claim Waiting Period (days)"
+            "fieldname": "driver_clauses",
+            "fieldtype": "Small Text",
+            "label": "Driver Clauses",
+            "reqd": 1
+        },
+        {
+            "fieldname": "insurance_act_declaration",
+            "fieldtype": "Small Text",
+            "label": "Insurance Act Declaration",
+            "reqd": 1
+        },
+        {
+            "fieldname": "motor_vehicle_act_reference",
+            "fieldtype": "Small Text",
+            "label": "Motor Vehicle Act Reference",
+            "reqd": 1
         },
         {
             "fieldname": "verification_rules_section",
@@ -110,55 +131,6 @@
             "fieldname": "block_approval_on_fraud_suspected",
             "fieldtype": "Check",
             "label": "Block Approval on Fraud Suspected"
-        },
-        {
-            "fieldname": "api_configuration_section",
-            "fieldtype": "Section Break",
-            "label": "API Configuration"
-        },
-        {
-            "default": "0",
-            "fieldname": "enable_vehicle_rc_verification",
-            "fieldtype": "Check",
-            "label": "Enable Vehicle RC Verification"
-        },
-        {
-            "fieldname": "rc_verification_provider",
-            "fieldtype": "Select",
-            "label": "RC Verification Provider",
-            "options": "Cashfree\nOther"
-        },
-        {
-            "fieldname": "cashfree_client_id",
-            "fieldtype": "Password",
-            "label": "Cashfree Client ID"
-        },
-        {
-            "fieldname": "cashfree_client_secret",
-            "fieldtype": "Password",
-            "label": "Cashfree Client Secret"
-        },
-        {
-            "fieldname": "column_break_api",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "cashfree_environment",
-            "fieldtype": "Select",
-            "label": "Cashfree Environment",
-            "options": "Sandbox\nProduction"
-        },
-        {
-            "default": "30",
-            "fieldname": "rc_api_timeout",
-            "fieldtype": "Int",
-            "label": "RC API Timeout (seconds)"
-        },
-        {
-            "default": "0",
-            "fieldname": "block_proposal_if_rc_invalid",
-            "fieldtype": "Check",
-            "label": "Block Proposal if RC Invalid"
         },
         {
             "fieldname": "email_rules_section",
@@ -191,7 +163,7 @@
     "index_web_pages_for_search": 1,
     "issingle": 1,
     "links": [],
-    "modified": "2026-01-09 00:00:00.000000",
+    "modified": "2026-01-11 00:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance System Settings",
@@ -212,6 +184,5 @@
     ],
     "sort_field": "modified",
     "sort_order": "DESC",
-    "states": [],
     "track_changes": 1
 }

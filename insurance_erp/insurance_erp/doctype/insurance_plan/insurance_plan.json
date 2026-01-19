@@ -9,13 +9,18 @@
         "plan_name",
         "plan_code",
         "column_break_basic",
-        "policy_type",
+        "insurance_type",
         "is_active",
         "pricing_section",
-        "max_claim_percent_of_idv",
+        "base_premium",
+        "idv_calculation_rule",
         "deductible_amount",
         "column_break_pricing",
-        "waiting_period_days",
+        "tp_liability_limit",
+        "pa_owner_driver_limit",
+        "passenger_cover_limit",
+        "slabs_section",
+        "depreciation_slabs",
         "coverage_section",
         "coverage_types",
         "description_section",
@@ -34,6 +39,7 @@
             "fieldname": "plan_code",
             "fieldtype": "Data",
             "label": "Plan Code",
+            "reqd": 1,
             "unique": 1
         },
         {
@@ -41,11 +47,11 @@
             "fieldtype": "Column Break"
         },
         {
-            "fieldname": "policy_type",
+            "fieldname": "insurance_type",
             "fieldtype": "Select",
             "in_list_view": 1,
-            "label": "Policy Type",
-            "options": "Comprehensive\nThird Party\nOwn Damage",
+            "label": "Insurance Type",
+            "options": "Package Policy\nBundled Policy\nStandalone Own Damage\nLiability Only",
             "reqd": 1
         },
         {
@@ -57,45 +63,77 @@
         {
             "fieldname": "pricing_section",
             "fieldtype": "Section Break",
-            "label": "Pricing & Rules"
+            "label": "Pricing & Basic Limits"
         },
         {
-            "default": "100",
-            "fieldname": "max_claim_percent_of_idv",
-            "fieldtype": "Float",
-            "label": "Max Claim % of IDV"
+            "fieldname": "base_premium",
+            "fieldtype": "Currency",
+            "label": "Base Premium",
+            "reqd": 1
+        },
+        {
+            "fieldname": "idv_calculation_rule",
+            "fieldtype": "Select",
+            "label": "IDV Calculation Rule",
+            "options": "Fixed Percentage\nDepreciation Based\nMarket Value",
+            "reqd": 1
         },
         {
             "fieldname": "deductible_amount",
             "fieldtype": "Currency",
-            "label": "Deductible Amount"
+            "label": "Deductible Amount",
+            "reqd": 1
         },
         {
             "fieldname": "column_break_pricing",
             "fieldtype": "Column Break"
         },
         {
-            "default": "0",
-            "fieldname": "waiting_period_days",
-            "fieldtype": "Int",
-            "label": "Waiting Period (Days)"
+            "fieldname": "tp_liability_limit",
+            "fieldtype": "Currency",
+            "label": "Third Party Liability Limit",
+            "reqd": 1
+        },
+        {
+            "fieldname": "pa_owner_driver_limit",
+            "fieldtype": "Currency",
+            "label": "PA Owner-Driver Limit",
+            "reqd": 1
+        },
+        {
+            "fieldname": "passenger_cover_limit",
+            "fieldtype": "Currency",
+            "label": "Passenger Cover Limit",
+            "reqd": 1
+        },
+        {
+            "fieldname": "slabs_section",
+            "fieldtype": "Section Break",
+            "label": "Depreciation Rules"
+        },
+        {
+            "fieldname": "depreciation_slabs",
+            "fieldtype": "Table",
+            "label": "Depreciation Slabs",
+            "options": "Insurance Depreciation Slab",
+            "reqd": 1
         },
         {
             "fieldname": "coverage_section",
             "fieldtype": "Section Break",
-            "label": "Coverage Details"
+            "label": "Additional Coverages"
         },
         {
             "fieldname": "coverage_types",
             "fieldtype": "Table",
-            "label": "Coverage Types",
+            "label": "Add-on Coverage Definitions",
             "options": "Insurance Coverage Type"
         },
         {
             "collapsible": 1,
             "fieldname": "description_section",
             "fieldtype": "Section Break",
-            "label": "Description"
+            "label": "Plan Description"
         },
         {
             "fieldname": "description",
@@ -105,7 +143,7 @@
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2026-01-09 00:00:00.000000",
+    "modified": "2026-01-11 00:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance Plan",

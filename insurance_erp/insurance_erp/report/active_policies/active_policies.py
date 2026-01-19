@@ -19,7 +19,7 @@ def execute(filters=None):
 			"width": 180
 		},
 		{
-			"fieldname": "registration_no",
+			"fieldname": "vehicle",
 			"label": "Vehicle",
 			"fieldtype": "Link",
 			"options": "Vehicle",
@@ -38,8 +38,8 @@ def execute(filters=None):
 			"width": 100
 		},
 		{
-			"fieldname": "premium_amount",
-			"label": "Premium",
+			"fieldname": "total_premium_payable",
+			"label": "Total Premium",
 			"fieldtype": "Currency",
 			"width": 120
 		},
@@ -51,9 +51,13 @@ def execute(filters=None):
 		}
 	]
 	
+	active_filters = {"status": "Active"}
+	if filters:
+		active_filters.update(filters)
+
 	data = frappe.get_all("Insurance Policy",
-		filters={"status": "Active"},
-		fields=["name as policy_number", "customer", "vehicle as registration_no", "policy_start_date", "policy_end_date", "premium_amount", "status"],
+		filters=active_filters,
+		fields=["name as policy_number", "customer", "vehicle", "policy_start_date", "policy_end_date", "total_premium_payable", "status"],
 		order_by="policy_end_date"
 	)
 	

@@ -4,93 +4,82 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import getdate
+from frappe.utils import getdate, flt
+import json
 
 class InsuranceClaim(Document):
-	def autoname(self):
-		"""Generate claim number from settings"""
-		settings = frappe.get_single("Insurance System Settings")
-		if settings.claim_naming_series:
-			self.name = frappe.model.naming.make_autoname(settings.claim_naming_series)
-
-	def before_insert(self):
-		self.claim_registration_date = frappe.utils.today()
-		self.set_details_from_policy()
-
 	def validate(self):
-		self.set_details_from_policy()
+		"""Validate claim details before submission"""
+		self.validate_mandatory_claim_data()
 		self.validate_policy_status()
 		self.validate_dates()
 		self.validate_coverage()
 		self.validate_limits()
+		
+		if self.docstatus == 1:
+			self.validate_settlement_data()
 
-	def set_details_from_policy(self):
-		if self.policy:
-			policy = frappe.get_doc("Sales Invoice", self.policy)
-			self.customer = policy.customer
-			self.vehicle = policy.vehicle
-			self.policy_number = policy.policy_number
-			self.insurance_plan = policy.insurance_plan
+	def validate_settlement_data(self):
+		"""Point 7: Enforce full settlement data before approval/submission"""
+		mandatory = ["approved_amount", "settlement_amount", "deductible_applied"]
+		for field in mandatory:
+			if not self.get(field):
+				frappe.throw(_("Field {0} is mandatory for Claim Settlement/Submission").format(self.meta.get_label(field)))
+
+	def validate_mandatory_claim_data(self):
+		"""Ensure all Indian standard claim fields are populated"""
+		mandatory = ["policy", "claim_date", "loss_date", "nature_of_loss", "claim_amount"]
+		for field in mandatory:
+			if not self.get(field):
+				frappe.throw(_("Field {0} is mandatory for Claim").format(self.meta.get_label(field)))
 
 	def validate_policy_status(self):
-		status = frappe.db.get_value("Sales Invoice", self.policy, "policy_status")
-		if status != "Active":
-			frappe.throw(_("Claims can only be filed against Active policies. Current status: {0}").format(status))
+		"""Ensure claim is only filed against an Active policy"""
+		policy = frappe.get_doc("Insurance Policy", self.policy)
+		if policy.status != "Active":
+			frappe.throw(_("Claims can only be filed against Active policies. Current policy status: {0}").format(policy.status))
 
 	def validate_dates(self):
-		policy = frappe.get_doc("Sales Invoice", self.policy)
-		date_of_loss = getdate(self.date_of_loss)
-		start_date = getdate(policy.policy_start_date)
-		end_date = getdate(policy.policy_end_date)
-
-		if not (start_date <= date_of_loss <= end_date):
-			frappe.throw(_("Date of Loss must be within the policy period ({0} to {1})").format(start_date, end_date))
-
-		# Waiting period check
-		plan = frappe.get_doc("Insurance Plan", policy.insurance_plan)
-		waiting_period = plan.waiting_period_days or 0
-		if (date_of_loss - start_date).days < waiting_period:
-			frappe.throw(_("Claim filed within waiting period of {0} days.").format(waiting_period))
+		"""Validate loss date against policy validity and claim date"""
+		policy = frappe.get_doc("Insurance Policy", self.policy)
+		
+		# Loss date within policy period
+		if getdate(self.loss_date) < getdate(policy.policy_start_date) or \
+			getdate(self.loss_date) > getdate(policy.policy_end_date):
+			frappe.throw(_("Loss Date {0} is outside the Policy Period ({1} to {2})").format(
+				self.loss_date, policy.policy_start_date, policy.policy_end_date
+			))
+		
+		# Loss date before claim date
+		if getdate(self.loss_date) > getdate(self.claim_date):
+			frappe.throw(_("Loss Date cannot be after Claim Date"))
 
 	def validate_coverage(self):
-		policy = frappe.get_doc("Sales Invoice", self.policy)
-		has_coverage = False
-		for row in policy.get("policy_coverage_snapshot"):
-			if row.coverage_type == self.coverage_type:
-				has_coverage = True
+		"""Verify that the nature of loss is covered by the policy snapshot"""
+		policy = frappe.get_doc("Insurance Policy", self.policy)
+		plan_snapshot = json.loads(policy.plan_snapshot_json) if policy.plan_snapshot_json else {}
+		
+		# If it's a standard cover, check coverage_snapshot table on policy
+		found = False
+		for row in policy.get("coverage_snapshot", []):
+			if row.coverage_type == self.nature_of_loss:
+				found = True
 				break
 		
-		if not has_coverage:
-			frappe.throw(_("Selected coverage type '{0}' is not covered by this policy.").format(self.coverage_type))
+		# Also check plan snapshots for specific categories
+		if not found:
+			# Fallback or specific logic for mandatory covers (OD/TP)
+			if self.nature_of_loss in ["Own Damage", "Third Party Liability"]:
+				found = True
+		
+		if not found:
+			frappe.msgprint(_("Warning: Nature of Loss '{0}' might not be explicitly listed in policy coverage snapshot.").format(self.nature_of_loss))
 
 	def validate_limits(self):
-		settings = frappe.get_single("Insurance System Settings")
-		policy = frappe.get_doc("Sales Invoice", self.policy)
+		"""Ensure claimed amount doesn't exceed IDV or specific plan limits"""
+		policy = frappe.get_doc("Insurance Policy", self.policy)
 		
-		# Max claims count
-		max_claims = settings.max_claims_per_policy or 999
-		existing_claims_count = frappe.db.count("Insurance Claim", {
-			"policy": self.policy,
-			"name": ["!=", self.name],
-			"claim_status": ["not in", ["Rejected"]]
-		})
-		if existing_claims_count >= max_claims:
-			frappe.throw(_("Maximum claims per policy ({0}) reached.").format(max_claims))
-
-		# Max claim amount % of IDV
-		max_claim_pct = settings.max_claim_percent_of_idv or 100
-		if (self.claim_amount / policy.idv * 100) > max_claim_pct:
-			frappe.throw(_("Claim amount exceeds allowed limit ({0}% of IDV). Max allowed: {1}").format(max_claim_pct, (policy.idv * max_claim_pct / 100)))
-
-@frappe.whitelist()
-def create_settlement_je(claim_name):
-	claim = frappe.get_doc("Insurance Claim", claim_name)
-	if claim.claim_status != "Approved":
-		frappe.throw(_("Only Approved claims can be settled."))
-	
-	if claim.settlement_journal_entry:
-		frappe.throw(_("Settlement already exists: {0}").format(claim.settlement_journal_entry))
-
-	# Logic to create JE would go here, typically connecting to Finance
-	# For now, we simulate or prompt user to create it manually and link it
-	frappe.msgprint(_("Please create a Journal Entry and link it to this claim to settle."))
+		if flt(self.claim_amount) > flt(policy.vehicle_idv):
+			frappe.throw(_("Claimed amount ({0}) exceeds the Insured Declared Value (IDV) of {1}").format(
+				self.claim_amount, policy.vehicle_idv
+			))

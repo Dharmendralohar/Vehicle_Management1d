@@ -19,7 +19,7 @@ def execute(filters=None):
 			"width": 150
 		},
 		{
-			"fieldname": "approved_amount",
+			"fieldname": "settlement_amount",
 			"label": "Settled Amount",
 			"fieldtype": "Currency",
 			"width": 120
@@ -43,7 +43,7 @@ def execute(filters=None):
 		SELECT 
 			c.name as claim_number,
 			c.customer,
-			c.approved_amount,
+			c.settlement_amount,
 			c.settlement_journal_entry,
 			je.posting_date as settlement_date
 		FROM `tabInsurance Claim` c

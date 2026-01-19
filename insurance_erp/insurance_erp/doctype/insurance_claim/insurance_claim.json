@@ -16,14 +16,17 @@
         "claim_info_section",
         "claim_number",
         "date_of_loss",
+        "nature_of_loss",
         "claim_registration_date",
         "column_break_claim",
         "coverage_type",
         "claim_amount",
+        "deductible_applied",
         "approved_amount",
+        "settlement_amount",
         "claim_status",
+        "workflow_section",
         "rejection_reason",
-        "verification_rules_section",
         "fraud_suspected",
         "column_break_verification",
         "verification_notes",
@@ -45,7 +48,8 @@
             "in_list_view": 1,
             "label": "Customer",
             "options": "Customer",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
         },
         {
             "fieldname": "policy",
@@ -60,7 +64,8 @@
             "in_list_view": 1,
             "label": "Vehicle",
             "options": "Vehicle",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
         },
         {
             "fieldname": "column_break_policy",
@@ -70,14 +75,16 @@
             "fieldname": "policy_number",
             "fieldtype": "Data",
             "label": "Policy Number",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
         },
         {
             "fieldname": "insurance_plan",
             "fieldtype": "Link",
             "label": "Insurance Plan",
             "options": "Insurance Plan",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
         },
         {
             "fieldname": "claim_info_section",
@@ -97,11 +104,18 @@
             "reqd": 1
         },
         {
+            "fieldname": "nature_of_loss",
+            "fieldtype": "Data",
+            "label": "Nature of Loss",
+            "reqd": 1
+        },
+        {
             "default": "Today",
             "fieldname": "claim_registration_date",
             "fieldtype": "Date",
             "label": "Claim Registration Date",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
         },
         {
             "fieldname": "column_break_claim",
@@ -121,9 +135,22 @@
             "reqd": 1
         },
         {
+            "fieldname": "deductible_applied",
+            "fieldtype": "Currency",
+            "label": "Deductible Applied",
+            "reqd": 1
+        },
+        {
             "fieldname": "approved_amount",
             "fieldtype": "Currency",
-            "label": "Approved Amount"
+            "label": "Approved Amount",
+            "reqd": 1
+        },
+        {
+            "fieldname": "settlement_amount",
+            "fieldtype": "Currency",
+            "label": "Settlement Amount",
+            "reqd": 1
         },
         {
             "default": "Reported",
@@ -131,17 +158,18 @@
             "fieldtype": "Select",
             "label": "Claim Status",
             "options": "Reported\nSurvey Assigned\nSurvey Completed\nVerification Assigned\nAgent Verified\nApproved\nRejected\nSettled",
-            "read_only": 1
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "workflow_section",
+            "fieldtype": "Section Break",
+            "label": "Workflow & Verification"
         },
         {
             "fieldname": "rejection_reason",
             "fieldtype": "Small Text",
             "label": "Rejection Reason"
-        },
-        {
-            "fieldname": "verification_rules_section",
-            "fieldtype": "Section Break",
-            "label": "Verification Rules"
         },
         {
             "default": "0",
@@ -161,7 +189,7 @@
         {
             "fieldname": "links_section",
             "fieldtype": "Section Break",
-            "label": "Links"
+            "label": "Reference Links"
         },
         {
             "fieldname": "survey",
@@ -191,7 +219,7 @@
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2026-01-09 00:00:00.000000",
+    "modified": "2026-01-11 00:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance Claim",

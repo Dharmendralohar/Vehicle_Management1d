@@ -65,7 +65,7 @@ frappe.ui.form.on('Insurance Policy', {
                     ],
                     primary_action_label: __('Confirm & Submit Payment'),
                     primary_action(values) {
-                        frappe.confirm(__('Submit Payment Entry for {0}?').format(format_currency(values.amount, frm.doc.currency)), function () {
+                        frappe.confirm(__('Submit Payment Entry for {0}?', [format_currency(values.amount, frm.doc.currency)]), function () {
                             d.get_primary_btn().prop('disabled', true);
                             frappe.call({
                                 method: 'insurance_erp.events.create_payment_for_policy',
