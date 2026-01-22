@@ -15,6 +15,12 @@ doc_events = {
     "Journal Entry": {
         "validate": "insurance_erp.events.validate_journal_entry",
         "on_submit": "insurance_erp.events.handle_journal_entry_submission"
+    },
+    "Sales Order": {
+        "validate": "insurance_erp.events.validate_sales_order"
+    },
+    "Sales Invoice": {
+        "before_insert": "insurance_erp.events.before_insert_sales_invoice"
     }
 }
 # Scheduled Tasks

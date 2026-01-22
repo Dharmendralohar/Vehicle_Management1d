@@ -1,7 +1,7 @@
 {
  "chart_name": "Claims by Status",
  "chart_type": "Group By",
- "creation": "2026-01-19 08:42:54.306997",
+ "creation": "2026-01-19 10:12:19.301410",
  "currency": "INR",
  "docstatus": 0,
  "doctype": "Dashboard Chart",
@@ -12,7 +12,7 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "modified": "2026-01-19 08:42:54.306997",
+ "modified": "2026-01-19 10:12:19.301410",
  "modified_by": "Administrator",
  "module": "Insurance Erp",
  "name": "Claims by Status",

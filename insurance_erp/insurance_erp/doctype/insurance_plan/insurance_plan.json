@@ -2,29 +2,33 @@
     "actions": [],
     "allow_rename": 1,
     "autoname": "field:plan_name",
-    "creation": "2026-01-09 00:00:00.000000",
+    "creation": "2024-01-21 10:00:00.000000",
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
         "plan_name",
-        "plan_code",
+        "active",
         "column_break_basic",
-        "insurance_type",
-        "is_active",
-        "pricing_section",
-        "base_premium",
-        "idv_calculation_rule",
-        "deductible_amount",
-        "column_break_pricing",
-        "tp_liability_limit",
-        "pa_owner_driver_limit",
-        "passenger_cover_limit",
-        "slabs_section",
-        "depreciation_slabs",
-        "coverage_section",
-        "coverage_types",
-        "description_section",
-        "description"
+        "vehicle_type",
+        "policy_type",
+        "od_config_section",
+        "od_rate_type",
+        "od_rate_value",
+        "column_break_od",
+        "min_od_premium",
+        "max_od_premium",
+        "tp_config_section",
+        "tp_rate_type",
+        "tp_premium_value",
+        "column_break_tp",
+        "engine_cc_from",
+        "engine_cc_to",
+        "tax_section",
+        "gst_rate",
+        "ncb_rules_section",
+        "ncb_slabs",
+        "addons_section",
+        "plan_addons"
     ],
     "fields": [
         {
@@ -36,114 +40,133 @@
             "unique": 1
         },
         {
-            "fieldname": "plan_code",
-            "fieldtype": "Data",
-            "label": "Plan Code",
-            "reqd": 1,
-            "unique": 1
+            "default": "1",
+            "fieldname": "active",
+            "fieldtype": "Check",
+            "label": "Active"
         },
         {
             "fieldname": "column_break_basic",
             "fieldtype": "Column Break"
         },
         {
-            "fieldname": "insurance_type",
+            "fieldname": "vehicle_type",
             "fieldtype": "Select",
             "in_list_view": 1,
-            "label": "Insurance Type",
-            "options": "Package Policy\nBundled Policy\nStandalone Own Damage\nLiability Only",
+            "label": "Vehicle Type",
+            "options": "Car\nBike\nCommercial",
             "reqd": 1
         },
         {
-            "default": "1",
-            "fieldname": "is_active",
-            "fieldtype": "Check",
-            "label": "Is Active"
-        },
-        {
-            "fieldname": "pricing_section",
-            "fieldtype": "Section Break",
-            "label": "Pricing & Basic Limits"
-        },
-        {
-            "fieldname": "base_premium",
-            "fieldtype": "Currency",
-            "label": "Base Premium",
-            "reqd": 1
-        },
-        {
-            "fieldname": "idv_calculation_rule",
+            "fieldname": "policy_type",
             "fieldtype": "Select",
-            "label": "IDV Calculation Rule",
-            "options": "Fixed Percentage\nDepreciation Based\nMarket Value",
+            "in_list_view": 1,
+            "label": "Policy Type",
+            "options": "Comprehensive\nThird Party\nOwn Damage",
             "reqd": 1
         },
         {
-            "fieldname": "deductible_amount",
-            "fieldtype": "Currency",
-            "label": "Deductible Amount",
+            "fieldname": "od_config_section",
+            "fieldtype": "Section Break",
+            "label": "Own Damage (OD) Premium Config"
+        },
+        {
+            "fieldname": "od_rate_type",
+            "fieldtype": "Select",
+            "label": "OD Rate Type",
+            "options": "Percentage\nFixed",
             "reqd": 1
         },
         {
-            "fieldname": "column_break_pricing",
+            "fieldname": "od_rate_value",
+            "fieldtype": "Float",
+            "label": "OD Rate Value (Type Dependent)",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_od",
             "fieldtype": "Column Break"
         },
         {
-            "fieldname": "tp_liability_limit",
+            "fieldname": "min_od_premium",
             "fieldtype": "Currency",
-            "label": "Third Party Liability Limit",
-            "reqd": 1
+            "label": "Min OD Premium"
         },
         {
-            "fieldname": "pa_owner_driver_limit",
+            "fieldname": "max_od_premium",
             "fieldtype": "Currency",
-            "label": "PA Owner-Driver Limit",
-            "reqd": 1
+            "label": "Max OD Premium"
         },
         {
-            "fieldname": "passenger_cover_limit",
-            "fieldtype": "Currency",
-            "label": "Passenger Cover Limit",
-            "reqd": 1
-        },
-        {
-            "fieldname": "slabs_section",
+            "fieldname": "tp_config_section",
             "fieldtype": "Section Break",
-            "label": "Depreciation Rules"
+            "label": "Third Party (TP) Premium Config"
         },
         {
-            "fieldname": "depreciation_slabs",
+            "fieldname": "tp_rate_type",
+            "fieldtype": "Select",
+            "label": "TP Rate Type",
+            "options": "Fixed\nSlab",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tp_premium_value",
+            "fieldtype": "Currency",
+            "label": "TP Premium Value/Base",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_tp",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "engine_cc_from",
+            "fieldtype": "Int",
+            "label": "Engine CC From"
+        },
+        {
+            "fieldname": "engine_cc_to",
+            "fieldtype": "Int",
+            "label": "Engine CC To"
+        },
+        {
+            "fieldname": "tax_section",
+            "fieldtype": "Section Break",
+            "label": "Tax Configuration"
+        },
+        {
+            "default": "18.0",
+            "fieldname": "gst_rate",
+            "fieldtype": "Percent",
+            "label": "GST Rate (%)",
+            "reqd": 1
+        },
+        {
+            "fieldname": "ncb_rules_section",
+            "fieldtype": "Section Break",
+            "label": "No Claim Bonus (NCB) Rules"
+        },
+        {
+            "fieldname": "ncb_slabs",
             "fieldtype": "Table",
-            "label": "Depreciation Slabs",
-            "options": "Insurance Depreciation Slab",
-            "reqd": 1
+            "label": "NCB Slabs",
+            "options": "NCB Slabs"
         },
         {
-            "fieldname": "coverage_section",
+            "fieldname": "addons_section",
             "fieldtype": "Section Break",
-            "label": "Additional Coverages"
+            "label": "Add-on Configuration"
         },
         {
-            "fieldname": "coverage_types",
+            "fieldname": "plan_addons",
             "fieldtype": "Table",
-            "label": "Add-on Coverage Definitions",
-            "options": "Insurance Coverage Type"
-        },
-        {
-            "collapsible": 1,
-            "fieldname": "description_section",
-            "fieldtype": "Section Break",
-            "label": "Plan Description"
-        },
-        {
-            "fieldname": "description",
-            "fieldtype": "Text Editor",
-            "label": "Description"
+            "label": "Plan Add-ons",
+            "options": "Plan Addons"
         }
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2026-01-11 00:00:00.000000",
+    "modified": "2024-01-21 10:00:00.000000",
     "modified_by": "Administrator",
     "module": "Insurance Erp",
     "name": "Insurance Plan",
@@ -153,15 +176,13 @@
         {
             "create": 1,
             "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
             "read": 1,
+            "report": 1,
             "role": "System Manager",
-            "write": 1
-        },
-        {
-            "create": 1,
-            "delete": 1,
-            "read": 1,
-            "role": "Insurance System Admin",
+            "share": 1,
             "write": 1
         },
         {
@@ -171,7 +192,5 @@
     ],
     "sort_field": "modified",
     "sort_order": "DESC",
-    "states": [],
-    "title_field": "plan_name",
     "track_changes": 1
 }

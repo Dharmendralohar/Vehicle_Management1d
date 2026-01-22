@@ -1,0 +1,63 @@
+{
+    "actions": [],
+    "creation": "2024-01-21 10:00:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "addon",
+        "pricing_type",
+        "pricing_value",
+        "mandatory",
+        "max_claims"
+    ],
+    "fields": [
+        {
+            "fieldname": "addon",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Addon",
+            "options": "Insurance Addon",
+            "reqd": 1
+        },
+        {
+            "fieldname": "pricing_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Pricing Type",
+            "options": "Flat\nPercentage of IDV",
+            "reqd": 1
+        },
+        {
+            "fieldname": "pricing_value",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Pricing Value",
+            "reqd": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "mandatory",
+            "fieldtype": "Check",
+            "label": "Mandatory"
+        },
+        {
+            "description": "0 for unlimited",
+            "fieldname": "max_claims",
+            "fieldtype": "Int",
+            "label": "Max Claims Allowed"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2024-01-21 10:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Plan Addons",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1
+}

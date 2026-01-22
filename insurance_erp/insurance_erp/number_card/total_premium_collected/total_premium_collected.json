@@ -1,0 +1,23 @@
+{
+ "aggregate_function_based_on": "total_premium_payable",
+ "creation": "2026-01-19 10:13:00.665726",
+ "currency": "INR",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Insurance Policy",
+ "filters_json": "[[\"Insurance Policy\",\"status\",\"=\",\"Active\",false]]",
+ "function": "Sum",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Total Premium Collected",
+ "modified": "2026-01-19 10:13:00.665726",
+ "modified_by": "Administrator",
+ "module": "Insurance Erp",
+ "name": "Total Premium Collected",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "type": "Document Type"
+}

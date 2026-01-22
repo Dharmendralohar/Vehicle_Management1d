@@ -1,0 +1,138 @@
+{
+    "actions": [],
+    "autoname": "format:VEH-{#####}",
+    "creation": "2024-01-21 10:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "customer",
+        "registration_no",
+        "column_break_basic",
+        "current_policy_ref",
+        "vehicle_details_section",
+        "make",
+        "model",
+        "variant",
+        "year",
+        "column_break_details",
+        "chassis_no",
+        "engine_no",
+        "fuel_type",
+        "engine_cc"
+    ],
+    "fields": [
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Customer",
+            "options": "Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "registration_no",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Registration No",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "column_break_basic",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "current_policy_ref",
+            "fieldtype": "Data",
+            "label": "Current Policy Reference / Expiry"
+        },
+        {
+            "fieldname": "vehicle_details_section",
+            "fieldtype": "Section Break",
+            "label": "Vehicle Details"
+        },
+        {
+            "fieldname": "make",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Make"
+        },
+        {
+            "fieldname": "model",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Model"
+        },
+        {
+            "fieldname": "variant",
+            "fieldtype": "Data",
+            "label": "Variant"
+        },
+        {
+            "fieldname": "year",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "label": "Year"
+        },
+        {
+            "fieldname": "column_break_details",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "chassis_no",
+            "fieldtype": "Data",
+            "label": "Chassis No"
+        },
+        {
+            "fieldname": "engine_no",
+            "fieldtype": "Data",
+            "label": "Engine No"
+        },
+        {
+            "fieldname": "fuel_type",
+            "fieldtype": "Select",
+            "label": "Fuel Type",
+            "options": "Petrol\nDiesel\nElectric\nHybrid\nCNG"
+        },
+        {
+            "fieldname": "engine_cc",
+            "fieldtype": "Int",
+            "label": "Engine CC"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2024-01-21 10:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Insurance Erp",
+    "name": "Vehicle",
+    "naming_rule": "Expression",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "read": 1,
+            "role": "Insurance Agent",
+            "write": 1
+        },
+        {
+            "read": 1,
+            "role": "Insurance Customer"
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1
+}

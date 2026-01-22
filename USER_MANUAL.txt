@@ -1,0 +1,91 @@
+INSURANCE ERP SYSTEM - USER MANUAL & WORKFLOW GUIDE
+===================================================
+
+This guide details how to create and execute the core workflows in the Insurance ERP system.
+
+1. PROPOSAL TO POLICY WORKFLOW (New Policy)
+-------------------------------------------
+How to create a new insurance policy for a customer.
+
+Step 1: Create Proposal
+   1. Navigate to "Insurance Proposal" list.
+   2. Click "Add Insurance Proposal".
+   3. Select a "Customer" and a "Vehicle".
+   4. Select an "Insurance Plan" (e.g., Gold Plan).
+   5. Set "Policy Duration From" and "Policy Duration To".
+   6. The system will automatically calculate the "Calculated IDV" and "Total Premium".
+   7. Save the document.
+   8. Review the details and click "Submit" to approve the proposal.
+
+Step 2: Record Payment
+   1. On the approved Proposal, click the "Record Payment" button (Actions menu).
+   2. A new "Payment Entry" form will open with details pre-filled.
+   3. Review the amount and bank fields.
+   4. Save and Submit the Payment Entry.
+
+Step 3: Convert to Policy
+   1. Go back to the Insurance Proposal.
+   2. Refresh the page.
+   3. Click the "Convert to Policy" button (Actions menu).
+   4. A new "Insurance Policy" is created and set to "Active" status automatically.
+   5. You can view the policy details, including the generated Policy Number.
+
+
+2. CLAIMS PROCESSING WORKFLOW
+-----------------------------
+How to file and settle an insurance claim.
+
+Step 1: File a Claim
+   1. Navigate to "Insurance Claim" list.
+   2. Click "Add Insurance Claim".
+   3. Select the "Policy" (must be Active).
+   4. Enter "Claim Registration Date", "Date of Loss", and "Nature of Loss" (e.g., Accident).
+   5. Enter the "Claim Amount".
+   6. Save. Status is "Reported".
+
+Step 2: Process & Approve
+   1. Review the claim details.
+   2. Change status for tracking (e.g. to "Surveyor Appointed").
+   3. Enter "Approved Amount" based on assessment.
+   4. Save and Submit.
+
+Step 3: Settlement
+   1. Update the status to "Settled".
+   2. Enter "Settlement Amount" and "Deductible Applied".
+   3. Save.
+
+
+3. POLICY ENDORSEMENT WORKFLOW
+------------------------------
+How to modify details of an active policy.
+
+Step 1: Create Endorsement
+   1. Navigate to "Policy Endorsement" list.
+   2. Click "Add Policy Endorsement".
+   3. Select the "Insurance Policy".
+   4. Enter the new details (e.g., change "New Nominee").
+   5. Save and Submit.
+   6. The changes are automatically applied to the specific fields in the master Insurance Policy.
+
+
+4. DASHBOARDS & ANALYTICS
+-------------------------
+How to view system reports.
+
+1. Workspace: Check the "Insurance" workspace for Number Cards (Total Active Policies, Pending Claims).
+2. All Policies: Go to `/app/all-policies` for a master list of all policies with status colors.
+3. All Claims: Go to `/app/all-claims` for a master list of all claims.
+
+
+ADMIN: GENERATING DUMMY DATA
+----------------------------
+To populate the system with test data:
+
+1. Open your terminal/bench console.
+2. Run the command:
+   bench --site [site-name] execute insurance_erp.create_full_dummy_data.create_full_dummy_data
+3. This will create:
+   - 6 Customers
+   - 6 Vehicles
+   - 2 Plans (Gold, Silver)
+   - Transactions: Active Policy, Draft Proposal, Approved Proposal, Settled Claim.

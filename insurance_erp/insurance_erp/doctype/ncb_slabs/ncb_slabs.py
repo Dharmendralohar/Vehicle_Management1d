@@ -1,4 +1,4 @@
 from frappe.model.document import Document
 
-class PolicyCoverageSnapshot(Document):
+class NCBSlabs(Document):
     pass
